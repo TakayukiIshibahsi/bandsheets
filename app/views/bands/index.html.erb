@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1 class="display-4 text-primary">Bands</h1>
+
+<div id="bands">
+  <% @bands.each do |band| %>
+    <%= render band %>
+    <p>
+      <%= link_to "Show this band", band %>
+    </p>
+  <% end %>
+</div>
+<p><a href='bands/new/<%=@count%>'>作成</p>
+
