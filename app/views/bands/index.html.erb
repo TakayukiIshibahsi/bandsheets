@@ -3,12 +3,11 @@
 <h1 class="display-4 text-primary">Bands</h1>
 
 <div id="bands">
+  <table><th>Id</th><th>Bandname</th><th>edit</th>
   <% @bands.each do |band| %>
-    <%= render band %>
-    <p>
-      <%= link_to "Show this band", band %>
-    </p>
+    <tr><td width="100px"><%=band.id%></td><td width="330px"><a href="/bands/<%=band.id%>"><%=band.band_name%></a></td><td><a href = "/bands/edit/<%=band.id%>">edit</a></td></tr>
   <% end %>
+</table>
 </div>
-<p><a href='bands/new/<%=@count%>'>作成</p>
+<p><a href='/bands/new/<%=@count%>'>作成</p>
 

@@ -11,6 +11,25 @@ class BandsController < ApplicationController
   def show
   end
 
+
+  def member 
+    @people=Person.all
+    @count=@people.length
+    begin 
+      @person=Person.new(person_id:Person.find(params[:name]).id, person_name:params[:name], band_id:params[:band_id])
+    rescue => e
+      @person=Person.new(person_id:nil, person_name:params[:name], band_id:params[:band_id])
+    end
+    respond_to do |format|
+      if @person.save
+        format.html { redirect_to "/bands/"+params[:band_id], notice: "Person was successfully created." }
+        format.json { render :show, status: :created, location: @person }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @person.errors, status: :unprocessable_entity }
+      end
+    end
+  end
   # GET /bands/new
   def new
     @band = Band.new
