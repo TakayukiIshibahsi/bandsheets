@@ -9,8 +9,31 @@ class BandsController < ApplicationController
 
   # GET /bands/1 or /bands/1.json
   def show
+      set_band
+      @people = Array.new
+      @members=BandPersonRb.where(band_id: params[:id])
+      @members.each do |m|
+        @people << Person.find(m.person_id)
+      end
   end
 
+  def addmember 
+      @word=params[:word]
+      @person=Person.where("person_name LIKE?","%"+@word+"%") 
+      
+      @band=Band.find(params[:band_id])
+  end
+
+  def crb
+      @rb=BandPersonRb.new(band_id: params[:band_id],person_id: params[:person_id])
+      respond_to do |format|
+        if @rb.save
+          format.html{
+            redirect_to "/bands/"+params[:band_id],notice: "You added new member!"
+          }
+        end
+      end
+  end
   # GET /bands/new
   def new
     @band = Band.new

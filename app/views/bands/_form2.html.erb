@@ -1,0 +1,24 @@
+<% if person.errors.any? %>
+    <div id="error_explanation">
+        <h2><%= pluralize(person.errors.count, "error")%>prohibited this answer from being saved:</h2>
+        <ul>
+            <% person.errors.full_message.each do |message| %>%
+            <li><%=message%></li>
+            <%end%>
+        </ul>
+    </div>
+<%end%>
+
+<%= form_for(person) do |form|%>
+    <%= form.hidden_field :band_id, {value: person.band_id}%>
+    <div class="form-group">
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_area :name ,class:"form-control"%>
+  </div>
+
+  <%= form.hidden_field :person_id, {value: if } %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

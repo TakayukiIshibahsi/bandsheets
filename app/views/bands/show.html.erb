@@ -1,10 +1,46 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @band %>
+<p class="display-4 text-primary">
+    <a href="/bands">Band</a> name:
+    <%= @band.band_name %>
+  </p>
+
+  <p >
+    <strong>Id:</strong>
+    <%= @band.id %>
+  </p>
+
+
+<ul class="list-group">  
+  <%if @people.blank? then%>
+    <p class="person">※まだありません</p>
+  <%else%>
+    <%@people.each do |re| %>
+    <li class="list-group-item">
+     <p> <a href="/people/<%=re.id%>"><%= re.person_name%></a> </p>
+      
+  <% end %>
+</ul>
+
+<%end%>
+<br>
+<table><th><td>メンバーを追加する</td></th></table>
+
+ <%= form_with url: "/bands/addmember",  method: :post do |f| %>
+      <%= f.text_field :word %>
+      <%= f.hidden_field :band_id , value: @band.id%>
+      <%= f.submit "検索", class: "btn-sm btn-primary" %>
+ <% end %>
+
+
+<br>
 
 <div>
   <%= link_to "Edit this band", edit_band_path(@band) %> |
   <%= link_to "Back to bands", bands_path %>
 
   <%= button_to "Destroy this band", @band, method: :delete %>
+
 </div>
+<br>
+
