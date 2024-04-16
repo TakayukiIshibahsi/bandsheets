@@ -1,0 +1,21 @@
+<h1 class="display-4 text-primary"><a href="/bands">Adding member</a></h1>
+
+<br>
+
+<div>
+  <table>
+    <tr><th><td width="100px">Name</td></th><th><td width="300px">Add</td></th><tr>
+    <% @person.each do |p|%>
+        <tr>
+            <th><td><%=p.person_name%></td></th>
+            <th><td>
+                <%= form_with url: "/bands/crb",  method: :post do |f| %>
+                <%= f.hidden_field :person_id , value: p.id%>
+                <%= f.hidden_field :band_id , value: @band.id%>
+                <%= f.submit "追加", class: "btn-sm btn-primary" %>
+                <% end %>
+            </td></th>
+        </tr>
+    <%end%>
+  </table>
+</div>

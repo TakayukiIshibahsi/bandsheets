@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   get "bands",to: "bands#index"
   get "bands/new/:id", to: "bands#new"
   post "bands/member"
+  post "bands/show", to: "people#search"
+  post "bands/addmember"
+  post "bands/crb"
+  get "bands/edit/:id",to:"bands#edit"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

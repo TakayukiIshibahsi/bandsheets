@@ -10,6 +10,7 @@ class PeopleController < ApplicationController
   def show
   end
 
+  
   # GET /people/new
   def new
     @person = Person.new

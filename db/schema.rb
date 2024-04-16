@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_14_123917) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_16_032403) do
+  create_table "band_person_rbs", force: :cascade do |t|
+    t.integer "band_id"
+    t.integer "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "bands", force: :cascade do |t|
     t.integer "band_id"
     t.text "band_name"
@@ -19,11 +26,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_14_123917) do
   end
 
   create_table "people", force: :cascade do |t|
-    t.integer "person_id"
     t.text "person_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "band_id"
   end
 
 end

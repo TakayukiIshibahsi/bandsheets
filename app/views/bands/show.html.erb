@@ -12,12 +12,12 @@
 
 
 <ul class="list-group">  
-  <%if @band.person.count == 0 then%>
+  <%if @people.blank? then%>
     <p class="person">※まだありません</p>
   <%else%>
-    <%@band.person.reverse_each do |re| %>
+    <%@people.each do |re| %>
     <li class="list-group-item">
-     <p> <a href="/people/<%=re.id%>"><%= re.person_name%></a> <%= button_to "Destroy this person", re, method: :delete,class:"btn-primary"%></p>
+     <p> <a href="/people/<%=re.id%>"><%= re.person_name%></a> </p>
       
   <% end %>
 </ul>
@@ -25,15 +25,14 @@
 <%end%>
 <br>
 <table><th><td>メンバーを追加する</td></th></table>
-<%= form_with url: "/bands/member",method: :post do |form|%>
-<div>
-<%=form.text_area :name ,class:"form-control"%>
-</div>
-<%= form.hidden_field :band_id, value: @band.id%>
-<div>
-<%=form.submit%>
-</div>
-<%end%>
+
+ <%= form_with url: "/bands/addmember",  method: :post do |f| %>
+      <%= f.text_field :word %>
+      <%= f.hidden_field :band_id , value: @band.id%>
+      <%= f.submit "検索", class: "btn-sm btn-primary" %>
+ <% end %>
+
+
 <br>
 
 <div>
@@ -41,7 +40,6 @@
   <%= link_to "Back to bands", bands_path %>
 
   <%= button_to "Destroy this band", @band, method: :delete %>
-
 
 </div>
 <br>
