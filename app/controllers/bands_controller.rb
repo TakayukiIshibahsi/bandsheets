@@ -25,14 +25,23 @@ class BandsController < ApplicationController
   end
 
   def crb
-      @rb=BandPersonRb.new(band_id: params[:band_id],person_id: params[:person_id])
-      respond_to do |format|
-        if @rb.save
+      if BandPersonRb.where(band_id: params[:band_id],person_id: params[:person_id]).blank? then
+        @rb=BandPersonRb.new(band_id: params[:band_id],person_id: params[:person_id])
+        respond_to do |format|
+         if @rb.save
           format.html{
             redirect_to "/bands/"+params[:band_id],notice: "You added new member!"
           }
+         end
+        end
+      else
+        respond_to do |format|
+          format.html{
+            redirect_to "/bands/"+params[:band_id],notice: "You already added this member!"
+          }
         end
       end
+      
   end
   # GET /bands/new
   def new
